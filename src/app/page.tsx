@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import PatientCard from "@/components/PatientCard";
 import ConsultationCard from "@/components/ConsultationCard";
 import AlerteIA from "@/components/AlerteIA";
