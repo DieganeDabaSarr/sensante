@@ -1,18 +1,3 @@
-  GNU nano 8.7                           src/app/page.tsx                           Modified
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import PatientCard from "@/components/PatientCard";
 
 export default function Home() {
