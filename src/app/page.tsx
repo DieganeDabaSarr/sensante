@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import PatientCard from "@/components/PatientCard";
-import ConsultationCard from "@/components/ConsultationCard";
 import AlerteIA from "@/components/AlerteIA";
 import StatCard from "@/components/StatCard";
 import LoginButton from "@/components/LoginButton";
@@ -32,19 +31,10 @@ export default function Home() {
           <PatientCard nom="Awa Diallo" region="Saint-Louis" age={28} sexe="F" />
         </div>
 
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">
-          Dernière consultation
-        </h2>
-        <ConsultationCard
-          patient="Aminata Sow"
-          date="18 mars 2025"
-          symptomes="Fièvre, toux, fatigue"
-          statut="termine"
-        />
-
         <div className="mt-6">
           <AlerteIA
-            message="8 alertes urgentes détectées par l'IA"
+            diagnostic="8 alertes urgentes détectées par l'IA"
+            confiance={95}
             niveau="urgent"
           />
         </div>
