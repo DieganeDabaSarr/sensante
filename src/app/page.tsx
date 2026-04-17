@@ -1,3 +1,18 @@
+  GNU nano 8.7                           src/app/page.tsx                           Modified
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import PatientCard from "@/components/PatientCard";
 
 export default function Home() {
@@ -10,13 +25,16 @@ export default function Home() {
         Assistant de santé communautaire avec IA
       </p>
       <h2 className="text-xl font-semibold text-gray-700 mb-4">
-        Membres de l'équipe
+        Derniers patients
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <PatientCard nom="Mariama Djiba" fonction="Gardien" groupe={3} sexe="F" />
-        <PatientCard nom="Mouhamed Diatta" fonction="Médecin" groupe={3} sexe="M" />
-        <PatientCard nom="Emilie Seck" fonction="Pilote" groupe={3} sexe="F" />
+        <PatientCard nom="Aminata Sow" region="Dakar" age={34} sexe="F" />
+        <PatientCard nom="Ibrahima Ba" region="Thiès" age={45} sexe="M" />
+        <PatientCard nom="Awa Diallo" region="Saint-Louis" age={28} sexe="F" />
       </div>
+      <p className="text-xs text-gray-400 italic mt-8">
+        Ceci n'est pas un outil médical. Consultez un professionnel de santé.
+      </p>
     </main>
-   );
+  );
 }
