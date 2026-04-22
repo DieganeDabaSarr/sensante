@@ -4,7 +4,6 @@ import ConsultationCard from "@/components/ConsultationCard";
 import AlerteIA from "@/components/AlerteIA";
 import StatCard from "@/components/StatCard";
 import LoginButton from "@/components/LoginButton";
-import Header from "@/components/Header";
 
 export default function Home() {
   return (
