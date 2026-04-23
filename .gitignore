@@ -43,3 +43,5 @@ next-env.d.ts
 /src/generated/prisma
 prisma.config.ts
 prisma/schema_backup.prisma
+prisma.config.ts
+prisma/schema_backup.prisma
