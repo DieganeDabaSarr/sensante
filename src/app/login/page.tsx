@@ -15,7 +15,7 @@ export default function LoginPage() {
         placeholder="Mot de passe"
         className="w-full p-3 border rounded -lg" />
       <button className="w-full bg-teal -600
-        text-white py-3 rounded -lg
+        text-black py-3 rounded -lg
         hover:bg-teal -700 transition">
         Se connecter
       </button >
