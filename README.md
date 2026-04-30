@@ -17,6 +17,44 @@ cp .env.example .env
 npx prisma db push
 npm run dev
 ```
+##  Authentification
+
+Ce projet utilise **NextAuth.js** pour gérer l'authentification des utilisateurs.
+
+---
+
+### Installation des dépendances
+
+```bash
+npm install next-auth bcrypt
+npm install --save-dev @types/bcrypt
+```
+
+---
+
+### Configuration des variables d'environnement
+
+Copie le fichier `.env.example` en `.env` :
+
+```bash
+cp .env.example .env
+```
+
+Ensuite remplis les variables dans ton fichier `.env` :
+
+```env
+NEXTAUTH_SECRET="ton-secret-genere-avec-openssl"
+NEXTAUTH_URL="http://localhost:3000"
+```
+### Générer un secret aléatoire
+
+En production, le secret doit être aléatoire. Génère-en un avec :
+
+```bash
+openssl rand -base64 32
+```
+
+Colle le résultat dans `NEXTAUTH_SECRET`.
 
 ## Équipe
 Licence 3 GLSI - ESP/UCAD - 2025-2026
