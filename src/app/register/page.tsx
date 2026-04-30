@@ -1,11 +1,10 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -16,16 +15,22 @@ export default function LoginPage() {
     setError("");
 
     const formData = new FormData(e.currentTarget);
-    const res = await signIn("credentials", {
-      email: formData.get("email"),
-      password: formData.get("password"),
-      redirect: false,
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nom: formData.get("nom"),
+        prenom: formData.get("prenom"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+      }),
     });
 
-    if (res?.error) {
-      setError("Email ou mot de passe incorrect");
+    if (res.ok) {
+      router.push("/login");
     } else {
-      router.push("/patients");
+      const data = await res.json();
+      setError(data.error || "Erreur d'inscription");
     }
     setLoading(false);
   }
@@ -34,7 +39,7 @@ export default function LoginPage() {
     <div className="flex items-center justify-center min-h-[80vh]">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold text-teal-700 mb-6 text-center">
-          Connexion à SénSanté
+          Inscription
         </h1>
         {error && (
           <p className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm">
@@ -42,6 +47,18 @@ export default function LoginPage() {
           </p>
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            name="nom"
+            placeholder="Nom"
+            required
+            className="w-full p-3 border rounded-lg"
+          />
+          <input
+            name="prenom"
+            placeholder="Prénom"
+            required
+            className="w-full p-3 border rounded-lg"
+          />
           <input
             name="email"
             type="email"
@@ -54,6 +71,7 @@ export default function LoginPage() {
             type="password"
             placeholder="Mot de passe"
             required
+            minLength={6}
             className="w-full p-3 border rounded-lg"
           />
           <button
@@ -61,13 +79,13 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition disabled:opacity-50"
           >
-            {loading ? "Connexion..." : "Se connecter"}
+            {loading ? "Inscription..." : "Créer mon compte"}
           </button>
         </form>
         <p className="text-sm text-gray-500 text-center mt-4">
-          Pas encore de compte ?{" "}
-          <Link href="/register" className="text-teal-600 hover:underline">
-            S'inscrire
+          Déjà un compte ?{" "}
+          <Link href="/login" className="text-teal-600 hover:underline">
+            Se connecter
           </Link>
         </p>
       </div>
