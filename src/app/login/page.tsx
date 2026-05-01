@@ -1,5 +1,4 @@
 "use client";
-
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -36,11 +35,13 @@ export default function LoginPage() {
         <h1 className="text-2xl font-bold text-teal-700 mb-6 text-center">
           Connexion à SénSanté
         </h1>
+
         {error && (
           <p className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm">
             {error}
           </p>
         )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             name="email"
@@ -64,6 +65,7 @@ export default function LoginPage() {
             {loading ? "Connexion..." : "Se connecter"}
           </button>
         </form>
+
         <p className="text-sm text-gray-500 text-center mt-4">
           Pas encore de compte ?{" "}
           <Link href="/register" className="text-teal-600 hover:underline">
