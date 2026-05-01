@@ -34,6 +34,10 @@ export async function POST(request: Request) {
       where: { email: session.user?.email! },
     });
 
+    if (!user) {
+      return NextResponse.json({ error: "Utilisateur non trouvé" }, { status: 404 });
+    }
+
     const consultation = await prisma.consultation.create({
       data: {
         patientId: body.patientId,

@@ -45,22 +45,31 @@ export default function ConsultationForm({
       return;
     }
     setLoading(true);
-    const formData = new FormData(e.currentTarget);
-    const res = await fetch("/api/consultations", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        patientId: Number(formData.get("patientId")),
-        symptomes: symptomes,
-        notes: formData.get("notes"),
-      }),
-    });
-    if (res.ok) {
-      setSymptomes([]);
-      e.currentTarget.reset();
-      onSuccess();
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      const res = await fetch("/api/consultations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          patientId: Number(formData.get("patientId")),
+          symptomes: symptomes,
+          notes: formData.get("notes"),
+        }),
+      });
+      if (res.ok) {
+        setSymptomes([]);
+        form.reset();
+        onSuccess();
+      } else {
+        const json = await res.json().catch(() => ({}));
+        alert(json.error || `Erreur ${res.status}`);
+      }
+    } catch (err) {
+      alert("Erreur réseau. Vérifiez votre connexion.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   return (
