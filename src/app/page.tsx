@@ -3,18 +3,16 @@ import PatientCard from "@/components/PatientCard";
 import ConsultationCard from "@/components/ConsultationCard";
 import AlerteIA from "@/components/AlerteIA";
 import StatCard from "@/components/StatCard";
-import LoginButton from "@/components/LoginButton";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
 
       <main className="p-8">
-        <div className="flex justify-between items-center mb-8">
+        <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-800">
             Tableau de bord
           </h2>
-          <LoginButton />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
