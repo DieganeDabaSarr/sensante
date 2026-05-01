@@ -29,7 +29,7 @@ export default function ConsultationForm({
   useEffect(() => {
     fetch("/api/patients")
       .then((res) => res.json())
-      .then(setPatients);
+      .then((data) => setPatients(Array.isArray(data) ? data : []));
   }, []);
 
   function toggleSymptome(s: string) {
