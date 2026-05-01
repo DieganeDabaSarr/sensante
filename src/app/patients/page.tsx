@@ -22,7 +22,7 @@ export default function PatientsPage() {
   async function chargerPatients() {
     const res = await fetch("/api/patients");
     const data = await res.json();
-    setPatients(data);
+    setPatients(Array.isArray(data) ? data : []);
     setLoading(false);
   }
 
