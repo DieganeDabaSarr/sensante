@@ -60,7 +60,8 @@ Propose un pré-diagnostic.`;
     completion.choices[0]?.message?.content || "{}";
 
   try {
-    return JSON.parse(response);
+    const match = response.match(/\{[\s\S]*\}/);
+    return JSON.parse(match ? match[0] : response);
   } catch {
     return {
       diagnostic: "Analyse impossible. Réessayez.",
