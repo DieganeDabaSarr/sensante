@@ -27,9 +27,9 @@ RÈGLES D'ANALYSE :
 
 Réponds UNIQUEMENT en JSON valide sans aucun texte avant ou après :
 {
-  "diagnostic": "pré-diagnostic précis basé sur la combinaison des symptômes",
+  "diagnostic": "Phrase complète décrivant le pré-diagnostic : pathologie probable, explication des symptômes qui y correspondent, et maladies à ne pas exclure.",
   "confiance": nombre_entre_0_et_100,
-  "recommandation": "action concrète et spécifique pour l'agent de santé",
+  "recommandation": "Phrase complète avec action concrète et spécifique pour l'agent de santé.",
   "urgence": "faible" | "moyen" | "urgent"
 }`;
 
