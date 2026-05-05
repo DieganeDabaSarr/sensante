@@ -10,6 +10,8 @@ interface Consultation {
   symptoms: string[];
   diagnosticIa: string | null;
   confiance: number | null;
+  urgence: string | null;
+  recommandation: string | null;
   statut: string;
   notes: string | null;
   patient: {
@@ -85,6 +87,8 @@ export default function ConsultationsPage() {
                 consultationId={c.id}
                 diagnosticExistant={c.diagnosticIa}
                 confianceExistante={c.confiance}
+                urgenceExistante={c.urgence}
+                recommandationExistante={c.recommandation}
                 onDiagnostic={charger}
               />
             </div>

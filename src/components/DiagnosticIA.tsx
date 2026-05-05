@@ -6,6 +6,8 @@ interface DiagnosticIAProps {
   consultationId: number;
   diagnosticExistant: string | null;
   confianceExistante: number | null;
+  urgenceExistante: string | null;
+  recommandationExistante: string | null;
   onDiagnostic: () => void;
 }
 
@@ -13,6 +15,8 @@ export default function DiagnosticIA({
   consultationId,
   diagnosticExistant,
   confianceExistante,
+  urgenceExistante,
+  recommandationExistante,
   onDiagnostic,
 }: DiagnosticIAProps) {
   const [loading, setLoading] = useState(false);
@@ -52,20 +56,36 @@ export default function DiagnosticIA({
 
   // Si diagnostic déjà existant
   if (diagnosticExistant) {
+    const urgence = urgenceExistante || "moyen";
+    const couleur = couleurs[urgence as keyof typeof couleurs] || couleurs.moyen;
     return (
-      <div className="mt-3 p-4 rounded-lg border-l-4 border-teal-500 bg-teal-50">
-        <p className="font-bold text-teal-800">Diagnostic IA</p>
+      <div className={`mt-3 p-4 rounded-lg border-l-4 ${couleur}`}>
+        <div className="flex justify-between items-center">
+          <p className="font-bold text-gray-800">Diagnostic IA</p>
+          <span className={`text-xs px-2 py-1 rounded-full font-bold ${
+            urgence === "urgent" ? "bg-red-200 text-red-800"
+            : urgence === "moyen" ? "bg-orange-200 text-orange-800"
+            : "bg-green-200 text-green-800"
+          }`}>
+            {urgence.toUpperCase()}
+          </span>
+        </div>
 
-        <p className="text-sm text-gray-700 mt-1">
-          {diagnosticExistant}
-        </p>
+        <p className="text-sm text-gray-700 mt-2">{diagnosticExistant}</p>
 
-        <p className="text-xs text-gray-500 mt-1">
-          Confiance : {confianceExistante}%
-        </p>
+        {recommandationExistante && (
+          <p className="text-sm text-gray-600 mt-2">{recommandationExistante}</p>
+        )}
 
-        <p className="text-xs text-gray-400 italic mt-2">
-          Ceci n'est pas un diagnostic médical.
+        <div className="mt-2">
+          <p className="text-xs text-gray-500">Confiance : {confianceExistante}%</p>
+          <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+            <div className="bg-orange-500 h-2 rounded-full" style={{ width: `${confianceExistante}%` }}></div>
+          </div>
+        </div>
+
+        <p className="text-xs text-gray-400 italic mt-3">
+          Ceci n'est pas un diagnostic médical. Consultez un professionnel de santé.
         </p>
       </div>
     );

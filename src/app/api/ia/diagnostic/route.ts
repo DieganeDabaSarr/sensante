@@ -57,6 +57,8 @@ export async function POST(request: Request) {
       data: {
         diagnosticIa: resultat.diagnostic,
         confiance: resultat.confiance,
+        urgence: resultat.urgence,
+        recommandation: resultat.recommandation,
         statut: "termine",
       },
       include: { patient: true },
