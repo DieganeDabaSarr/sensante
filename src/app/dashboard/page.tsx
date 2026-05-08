@@ -61,7 +61,7 @@ export default function DashboardPage() {
     return <p className="text-gray-500">Chargement du dashboard...</p>;
   }
 
-  if (!stats) return null;
+  if (!stats || !stats.kpi) return null;
 
   return (
     <div>
@@ -145,7 +145,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Zone 4 : Dernières alertes */}
-[O      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold text-gray-700 mb-4">
           Derniers diagnostics IA
         </h2>
