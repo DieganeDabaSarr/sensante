@@ -1,9 +1,5 @@
 import Groq from "groq-sdk";
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
-
 const SYSTEM_PROMPT = `Tu es L'Oracle, un assistant médical expert pour le Sénégal. Tu aides les agents de santé communautaires ruraux à identifier des pathologies prioritaires.
 
 CONTEXTE ÉPIDÉMIOLOGIQUE SÉNÉGALAIS :
@@ -57,6 +53,8 @@ Symptômes présentés : ${symptomes.join(", ")}
 ${notes ? `Notes cliniques de l'agent : ${notes}` : "Aucune note complémentaire."}
 
 Analyse ces symptômes dans leur ensemble et propose le pré-diagnostic le plus probable pour ce patient dans le contexte sénégalais.`;
+
+  const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
   const completion = await groq.chat.completions.create({
     messages: [
