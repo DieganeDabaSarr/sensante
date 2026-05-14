@@ -50,8 +50,8 @@ export default function DiagnosticIA({
 
   const couleurs = {
     faible: "border-green-500 bg-green-50",
-    moyen: "border-gray-600 bg-red-50",
-    urgent: "border-gray-600 bg-red-50",
+    moyen: "border-orange-400 bg-orange-50",
+    urgent: "border-red-500 bg-red-50",
   };
 
   // Si diagnostic déjà existant
@@ -80,7 +80,7 @@ export default function DiagnosticIA({
         <div className="mt-2">
           <p className="text-xs text-gray-500">Confiance : {confianceExistante}%</p>
           <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-            <div className="bg-gray-600 h-2 rounded-full" style={{ width: `${confianceExistante}%` }}></div>
+            <div className="bg-sky-500 h-2 rounded-full" style={{ width: `${confianceExistante}%` }}></div>
           </div>
         </div>
 

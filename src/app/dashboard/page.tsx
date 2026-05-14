@@ -79,13 +79,13 @@ export default function DashboardPage() {
           titre="Patients"
           valeur={stats.kpi.totalPatients}
           unite="enregistrés"
-          couleur="border-gray-600"
+          couleur="border-sky-500"
         />
         <StatCard
           titre="Consultations"
           valeur={stats.kpi.totalConsultations}
           unite="au total"
-          couleur="border-gray-600"
+          couleur="border-sky-500"
         />
         <StatCard
           titre="Diagnostics IA"
@@ -97,7 +97,7 @@ export default function DashboardPage() {
           titre="Alertes"
           valeur={stats.kpi.alertesUrgentes}
           unite="urgentes"
-          couleur="border-gray-600"
+          couleur="border-sky-500"
         />
       </div>
 
@@ -113,7 +113,7 @@ export default function DashboardPage() {
               <XAxis dataKey="mois" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="total" fill="#E65100" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="total" fill="#0284c7" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

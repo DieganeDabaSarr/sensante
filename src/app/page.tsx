@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="space-y-8">
       {/* Bannière de bienvenue */}
-      <div className="bg-gradient-to-r from-gray-800 to-gray-600 rounded-2xl p-8 text-white">
+      <div className="bg-gradient-to-r from-sky-800 to-sky-600 rounded-2xl p-8 text-white">
         <p className="text-gray-300 text-sm mb-1">{salutation},</p>
         <h1 className="text-3xl font-bold mb-2">{prenom}</h1>
         <p className="text-gray-300">

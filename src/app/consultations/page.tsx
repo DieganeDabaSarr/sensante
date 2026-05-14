@@ -51,7 +51,7 @@ export default function ConsultationsPage() {
       ) : (
         <div className="space-y-4">
           {consultations.map((c) => (
-            <div key={c.id} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-600">
+            <div key={c.id} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-sky-500">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-bold text-gray-800">
@@ -72,7 +72,7 @@ export default function ConsultationsPage() {
 
               <div className="flex flex-wrap gap-2 mt-3">
                 {(c.symptoms as string[]).map((s, i) => (
-                  <span key={i} className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full">
+                  <span key={i} className="bg-sky-100 text-sky-700 text-xs px-2 py-1 rounded-full">
                     {s}
                   </span>
                 ))}

@@ -101,13 +101,13 @@ export default function ConsultationForm({
             <label
               key={s}
               className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition
-                ${symptomes.includes(s) ? "bg-red-50 border-gray-500" : "hover:bg-gray-50"}`}
+                ${symptomes.includes(s) ? "bg-sky-50 border-sky-500" : "hover:bg-sky-50"}`}
             >
               <input
                 type="checkbox"
                 checked={symptomes.includes(s)}
                 onChange={() => toggleSymptome(s)}
-                className="accent-gray-600"
+                className="accent-sky-600"
               />
               <span className="text-sm">{s}</span>
             </label>
@@ -131,7 +131,7 @@ export default function ConsultationForm({
       <button
         type="submit"
         disabled={loading}
-        className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition disabled:opacity-50"
+        className="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition disabled:opacity-50"
       >
         {loading ? "Enregistrement..." : "Enregistrer la consultation"}
       </button>

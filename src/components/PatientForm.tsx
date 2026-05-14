@@ -63,7 +63,7 @@ export default function PatientForm({ onSuccess }: { onSuccess: () => void }) {
       </div>
       <input name="adresse" placeholder="Adresse (optionnel)" className="w-full p-3 border rounded-lg" />
       <button type="submit" disabled={loading}
-        className="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition disabled:opacity-50">
+        className="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition disabled:opacity-50">
         {loading ? "Enregistrement..." : "Enregistrer"}
       </button>
     </form>

@@ -33,7 +33,7 @@ export default function LoginPage() {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-10 animated-gradient">
       <div className="relative z-10 bg-white/90 backdrop-blur-sm p-12 rounded-2xl shadow-2xl w-full max-w-lg">
-        <h1 className="text-2xl font-bold text-gray-700 mb-1 text-center">
+        <h1 className="text-2xl font-bold text-sky-700 mb-1 text-center">
           SénSanté
         </h1>
         <p className="text-sm text-gray-500 text-center mb-6">
@@ -52,7 +52,7 @@ export default function LoginPage() {
             type="email"
             placeholder="Email"
             required
-            className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-700"
+            className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"
           />
           <div className="relative">
             <input
@@ -60,7 +60,7 @@ export default function LoginPage() {
               type={showPassword ? "text" : "password"}
               placeholder="Mot de passe"
               required
-              className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-700 pr-12"
+              className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 pr-12"
             />
             <button
               type="button"
@@ -82,7 +82,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gray-700 text-white py-3 rounded-lg hover:bg-gray-700 transition disabled:opacity-50 font-semibold"
+            className="w-full bg-sky-600 text-white py-3 rounded-lg hover:bg-sky-700 transition disabled:opacity-50 font-semibold"
           >
             {loading ? "Connexion..." : "Se connecter"}
           </button>
@@ -90,7 +90,7 @@ export default function LoginPage() {
 
         <p className="text-sm text-gray-500 text-center mt-4">
           Pas encore de compte ?{" "}
-          <Link href="/register" className="text-gray-700 hover:underline font-medium">
+          <Link href="/register" className="text-sky-600 hover:underline font-medium">
             S'inscrire
           </Link>
         </p>

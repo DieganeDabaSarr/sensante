@@ -18,7 +18,7 @@ export default function ProfilPage() {
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Mon profil</h1>
       <div className="bg-white rounded-lg shadow-md p-6 max-w-md">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+          <div className="w-16 h-16 bg-sky-700 rounded-full flex items-center justify-center text-white text-2xl font-bold">
             {session.user?.name?.charAt(0).toUpperCase()}
           </div>
           <div>
