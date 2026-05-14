@@ -31,7 +31,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-gray-700 via-gray-700 to-gray-700 z-10">
+    <div className="fixed inset-0 flex items-center justify-center z-10 animated-gradient">
       <div className="relative z-10 bg-white/90 backdrop-blur-sm p-12 rounded-2xl shadow-2xl w-full max-w-lg">
         <h1 className="text-2xl font-bold text-gray-700 mb-1 text-center">
           SénSanté

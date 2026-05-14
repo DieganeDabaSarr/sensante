@@ -15,7 +15,7 @@ export default function Header() {
               {session.user?.name}
             </span>
             <button
-              onClick={() => signOut()}
+              onClick={() => signOut({ callbackUrl: `${window.location.origin}/login` })}
               className="text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600 transition"
             >
               Déconnexion
