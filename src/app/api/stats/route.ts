@@ -55,10 +55,51 @@ export async function GET() {
     parMois[key] = (parMois[key] || 0) + 1;
   });
 
+  // Urgences par mois
+  const consultationsUrgentes = await prisma.consultation.findMany({
+    where: { date: { gte: sixMoisAgo }, urgence: "urgent" },
+    select: { date: true },
+  });
+
+  const urgencesParMois: Record<string, number> = {};
+  consultationsUrgentes.forEach((c) => {
+    const d = new Date(c.date);
+    const key = `${moisNoms[d.getMonth()]} ${d.getFullYear()}`;
+    urgencesParMois[key] = (urgencesParMois[key] || 0) + 1;
+  });
+
+  // Top 5 diagnostics
+  const tousLesDiagnostics = await prisma.consultation.findMany({
+    where: { diagnosticIa: { not: null } },
+    select: { diagnosticIa: true },
+  });
+
+  const pathologies: Record<string, number> = {};
+  const motsCles = [
+    "paludisme", "tuberculose", "dengue", "typhoïde",
+    "méningite", "anémie", "gastro-entérite", "respiratoire",
+  ];
+
+  tousLesDiagnostics.forEach(({ diagnosticIa }) => {
+    const texte = (diagnosticIa || "").toLowerCase();
+    motsCles.forEach((mot) => {
+      if (texte.includes(mot)) {
+        pathologies[mot] = (pathologies[mot] || 0) + 1;
+      }
+    });
+  });
+
+  const topDiagnostics = Object.entries(pathologies)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([nom, total]) => ({
+      nom: nom.charAt(0).toUpperCase() + nom.slice(1),
+      total,
+    }));
+
   // Dernières alertes urgentes
   const dernieresAlertes = await prisma.consultation.findMany({
     where: {
-      statut: "termine",
       diagnosticIa: { not: null },
     },
     include: { patient: true },
@@ -81,6 +122,11 @@ export async function GET() {
       mois,
       total,
     })),
+    urgencesParMois: Object.entries(urgencesParMois).map(([mois, total]) => ({
+      mois,
+      total,
+    })),
+    topDiagnostics,
     dernieresAlertes: dernieresAlertes.map((a) => ({
       id: a.id,
       patient: `${a.patient.prenom} ${a.patient.nom}`,

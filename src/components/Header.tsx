@@ -6,17 +6,17 @@ export default function Header() {
   const { data: session } = useSession();
 
   return (
-    <header className="bg-teal-700 text-white p-4 flex items-center justify-between">
+    <header className="bg-gray-800 text-white p-4 flex items-center justify-between">
       <h1 className="text-xl font-bold">SénSanté</h1>
       <div className="flex items-center gap-4">
         {session ? (
           <>
-            <span className="text-sm text-teal-200">
+            <span className="text-sm text-gray-200">
               {session.user?.name}
             </span>
             <button
               onClick={() => signOut()}
-              className="text-sm bg-teal-600 px-3 py-1 rounded hover:bg-teal-500 transition"
+              className="text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600 transition"
             >
               Déconnexion
             </button>
@@ -24,7 +24,7 @@ export default function Header() {
         ) : (
           <Link
             href="/login"
-            className="text-sm bg-teal-600 px-3 py-1 rounded hover:bg-teal-500 transition"
+            className="text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600 transition"
           >
             Se connecter
           </Link>

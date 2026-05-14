@@ -50,8 +50,8 @@ export default function DiagnosticIA({
 
   const couleurs = {
     faible: "border-green-500 bg-green-50",
-    moyen: "border-orange-500 bg-orange-50",
-    urgent: "border-red-500 bg-red-50",
+    moyen: "border-gray-600 bg-red-50",
+    urgent: "border-gray-600 bg-red-50",
   };
 
   // Si diagnostic déjà existant
@@ -63,7 +63,7 @@ export default function DiagnosticIA({
         <div className="flex justify-between items-center">
           <p className="font-bold text-gray-800">Diagnostic IA</p>
           <span className={`text-xs px-2 py-1 rounded-full font-bold ${
-            urgence === "urgent" ? "bg-red-200 text-red-800"
+            urgence === "urgent" ? "bg-gray-200 text-gray-800"
             : urgence === "moyen" ? "bg-orange-200 text-orange-800"
             : "bg-green-200 text-green-800"
           }`}>
@@ -80,7 +80,7 @@ export default function DiagnosticIA({
         <div className="mt-2">
           <p className="text-xs text-gray-500">Confiance : {confianceExistante}%</p>
           <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-            <div className="bg-orange-500 h-2 rounded-full" style={{ width: `${confianceExistante}%` }}></div>
+            <div className="bg-gray-600 h-2 rounded-full" style={{ width: `${confianceExistante}%` }}></div>
           </div>
         </div>
 
@@ -119,7 +119,7 @@ export default function DiagnosticIA({
             <span
               className={`text-xs px-2 py-1 rounded-full font-bold ${
                 resultat.urgence === "urgent"
-                  ? "bg-red-200 text-red-800"
+                  ? "bg-gray-200 text-gray-800"
                   : resultat.urgence === "moyen"
                   ? "bg-orange-200 text-orange-800"
                   : "bg-green-200 text-green-800"
@@ -144,7 +144,7 @@ export default function DiagnosticIA({
 
             <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
               <div
-                className="bg-orange-500 h-2 rounded-full"
+                className="bg-gray-600 h-2 rounded-full"
                 style={{ width: `${resultat.confiance}%` }}
               ></div>
             </div>

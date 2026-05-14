@@ -51,15 +51,14 @@ export default function ConsultationsPage() {
       ) : (
         <div className="space-y-4">
           {consultations.map((c) => (
-            <div key={c.id} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-orange-400">
+            <div key={c.id} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-600">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-bold text-gray-800">
                     {c.patient.prenom} {c.patient.nom}
                   </h3>
                   <p className="text-sm text-gray-500">
-                    {c.patient.region} —{" "}
-                    {new Date(c.date).toLocaleDateString("fr-FR")}
+                    {c.patient.region} — {new Date(c.date).toLocaleDateString("fr-FR")}
                   </p>
                 </div>
                 <span className={`text-xs px-3 py-1 rounded-full ${
@@ -73,7 +72,7 @@ export default function ConsultationsPage() {
 
               <div className="flex flex-wrap gap-2 mt-3">
                 {(c.symptoms as string[]).map((s, i) => (
-                  <span key={i} className="bg-orange-50 text-orange-700 text-xs px-2 py-1 rounded-full">
+                  <span key={i} className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full">
                     {s}
                   </span>
                 ))}

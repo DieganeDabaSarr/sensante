@@ -53,7 +53,7 @@ export default function ConsultationForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           patientId: Number(formData.get("patientId")),
-          symptomes: symptomes,
+          symptoms: symptomes,
           notes: formData.get("notes"),
         }),
       });
@@ -101,13 +101,13 @@ export default function ConsultationForm({
             <label
               key={s}
               className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition
-                ${symptomes.includes(s) ? "bg-orange-50 border-orange-400" : "hover:bg-gray-50"}`}
+                ${symptomes.includes(s) ? "bg-red-50 border-gray-500" : "hover:bg-gray-50"}`}
             >
               <input
                 type="checkbox"
                 checked={symptomes.includes(s)}
                 onChange={() => toggleSymptome(s)}
-                className="accent-orange-500"
+                className="accent-gray-600"
               />
               <span className="text-sm">{s}</span>
             </label>
@@ -131,7 +131,7 @@ export default function ConsultationForm({
       <button
         type="submit"
         disabled={loading}
-        className="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition disabled:opacity-50"
+        className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition disabled:opacity-50"
       >
         {loading ? "Enregistrement..." : "Enregistrer la consultation"}
       </button>

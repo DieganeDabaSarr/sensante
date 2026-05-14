@@ -13,7 +13,7 @@ export default function ConsultationCard({
     : "bg-yellow-100 text-yellow-700";
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-orange-400">
+    <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-600">
       <div className="flex justify-between items-center">
         <h3 className="font-bold text-gray-800">{patient}</h3>
         <span className={`text-xs px-2 py-1 rounded-full ${statutColor}`}>

@@ -7,8 +7,8 @@ interface AlerteIAProps {
 export default function AlerteIA({ diagnostic, confiance, niveau }: AlerteIAProps) {
   const couleurs = {
     faible: "border-green-500 bg-green-50",
-    moyen: "border-orange-500 bg-orange-50",
-    urgent: "border-red-500 bg-red-50",
+    moyen: "border-gray-600 bg-red-50",
+    urgent: "border-gray-600 bg-red-50",
   };
 
   return (

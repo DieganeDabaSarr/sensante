@@ -42,7 +42,7 @@ export async function POST(request: Request) {
       data: {
         patientId: body.patientId,
         userId: user!.id,
-        symptoms: body.symptomes,
+        symptoms: body.symptoms,
         notes: body.notes || null,
         statut: "en_attente",
       },

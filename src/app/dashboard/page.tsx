@@ -14,6 +14,8 @@ import {
   Pie,
   Cell,
   Legend,
+  LineChart,
+  Line,
 } from "recharts";
 
 interface Stats {
@@ -25,6 +27,8 @@ interface Stats {
   };
   parRegion: { region: string; total: number }[];
   parMois: { mois: string; total: number }[];
+  urgencesParMois: { mois: string; total: number }[];
+  topDiagnostics: { nom: string; total: number }[];
   dernieresAlertes: {
     id: number;
     patient: string;
@@ -75,13 +79,13 @@ export default function DashboardPage() {
           titre="Patients"
           valeur={stats.kpi.totalPatients}
           unite="enregistrés"
-          couleur="border-teal-500"
+          couleur="border-gray-600"
         />
         <StatCard
           titre="Consultations"
           valeur={stats.kpi.totalConsultations}
           unite="au total"
-          couleur="border-orange-500"
+          couleur="border-gray-600"
         />
         <StatCard
           titre="Diagnostics IA"
@@ -93,7 +97,7 @@ export default function DashboardPage() {
           titre="Alertes"
           valeur={stats.kpi.alertesUrgentes}
           unite="urgentes"
-          couleur="border-red-500"
+          couleur="border-gray-600"
         />
       </div>
 
@@ -144,7 +148,40 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Zone 4 : Dernières alertes */}
+      {/* Zone 4 : Évolution urgences + Top diagnostics */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">
+            Évolution des urgences
+          </h2>
+          <ResponsiveContainer width="100%" height={250}>
+            <LineChart data={stats.urgencesParMois ?? []}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="mois" />
+              <YAxis allowDecimals={false} />
+              <Tooltip />
+              <Line type="monotone" dataKey="total" stroke="#EF4444" strokeWidth={2} dot={{ r: 4 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">
+            Top 5 des diagnostics IA
+          </h2>
+          <ResponsiveContainer width="100%" height={250}>
+            <BarChart data={stats.topDiagnostics ?? []} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" allowDecimals={false} />
+              <YAxis type="category" dataKey="nom" width={100} />
+              <Tooltip />
+              <Bar dataKey="total" fill="#7C3AED" radius={[0, 4, 4, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* Zone 5 : Dernières alertes */}
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-lg font-semibold text-gray-700 mb-4">
           Derniers diagnostics IA
@@ -164,7 +201,9 @@ export default function DashboardPage() {
               <div className="text-right">
                 <p className="text-sm text-gray-700">
                   {a.diagnostic
-                    ? a.diagnostic.substring(0, 50) + "..."
+                    ? a.diagnostic.length > 60
+                      ? a.diagnostic.substring(0, 60) + "..."
+                      : a.diagnostic
                     : "En attente"}
                 </p>
                 <p className="text-xs text-gray-500">

@@ -1,53 +1,133 @@
-import Header from "@/components/Header";
-import PatientCard from "@/components/PatientCard";
-import ConsultationCard from "@/components/ConsultationCard";
-import AlerteIA from "@/components/AlerteIA";
-import StatCard from "@/components/StatCard";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+
+interface Stats {
+  kpi: {
+    totalPatients: number;
+    totalConsultations: number;
+    alertesUrgentes: number;
+  };
+}
 
 export default function Home() {
+  const { data: session } = useSession();
+  const [stats, setStats] = useState<Stats | null>(null);
+
+  useEffect(() => {
+    fetch("/api/stats")
+      .then((r) => r.json())
+      .then((d) => { if (d.kpi) setStats(d); });
+  }, []);
+
+  const prenom = (session?.user as any)?.prenom
+    || session?.user?.name?.split(" ")[0]
+    || "Docteur";
+
+  const heure = new Date().getHours();
+  const salutation =
+    heure < 12 ? "Bonjour" : heure < 18 ? "Bon après-midi" : "Bonsoir";
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="space-y-8">
+      {/* Bannière de bienvenue */}
+      <div className="bg-gradient-to-r from-gray-800 to-gray-600 rounded-2xl p-8 text-white">
+        <p className="text-gray-300 text-sm mb-1">{salutation},</p>
+        <h1 className="text-3xl font-bold mb-2">{prenom}</h1>
+        <p className="text-gray-300">
+          Bienvenue sur SénSanté
+        </p>
+      </div>
 
-      <main className="p-8">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800">
-            Tableau de bord
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <StatCard titre="Patients" valeur={127} unite="enregistrés" couleur="border-teal-500" />
-          <StatCard titre="Consultations" valeur={43} unite="ce mois" couleur="border-orange-500" />
-          <StatCard titre="Alertes IA" valeur={8} unite="urgentes" couleur="border-red-500" />
-        </div>
-
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">
-          Derniers patients
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <PatientCard nom="Aminata Sow" region="Dakar" age={34} sexe="F" />
-          <PatientCard nom="Ibrahima Ba" region="Thiès" age={45} sexe="M" />
-          <PatientCard nom="Awa Diallo" region="Saint-Louis" age={28} sexe="F" />
-        </div>
-
-        <h2 className="text-xl font-semibold text-gray-700 mb-4">
-          Dernière consultation
-        </h2>
-        <ConsultationCard
-          patient="Aminata Sow"
-          date="18 mars 2025"
-          symptomes="Fièvre, toux, fatigue"
-          statut="termine"
-        />
-
-        <div className="mt-6">
-          <AlerteIA
-            diagnostic="Suspicion de paludisme. Orientation recommandée."
-            confiance={78}
-            niveau="urgent"
+      {/* KPI réels */}
+      <div>
+        <h2 className="text-lg font-semibold text-gray-700 mb-4">Statistiques en temps réel</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <KpiCard
+            label="Patients enregistrés"
+            value={stats?.kpi.totalPatients}
+            color="bg-blue-50 border-blue-200 text-blue-700"
+          />
+          <KpiCard
+            label="Consultations totales"
+            value={stats?.kpi.totalConsultations}
+            color="bg-green-50 border-green-200 text-green-700"
+          />
+          <KpiCard
+            label="Alertes IA actives"
+            value={stats?.kpi.alertesUrgentes}
+            color="bg-red-50 border-red-200 text-red-700"
           />
         </div>
-      </main>
+      </div>
+
+      {/* Raccourcis */}
+      <div>
+        <h2 className="text-lg font-semibold text-gray-700 mb-4">Accès rapide</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Shortcut
+            href="/patients"
+            title="Patients"
+            description="Ajouter ou consulter la liste des patients."
+            bg="bg-indigo-50 hover:bg-indigo-100 border-indigo-200"
+          />
+          <Shortcut
+            href="/consultations"
+            title="Consultations"
+            description="Enregistrer une consultation et obtenir un diagnostic IA."
+            bg="bg-emerald-50 hover:bg-emerald-100 border-emerald-200"
+          />
+          <Shortcut
+            href="/dashboard"
+            title="Tableau de bord"
+            description="Visualiser les statistiques et tendances épidémiques."
+            bg="bg-amber-50 hover:bg-amber-100 border-amber-200"
+          />
+        </div>
+      </div>
     </div>
+  );
+}
+
+function KpiCard({
+  label,
+  value,
+  color,
+}: {
+  label: string;
+  value: number | undefined;
+  color: string;
+}) {
+  return (
+    <div className={`rounded-xl border p-5 ${color}`}>
+      <p className="text-3xl font-bold">
+        {value !== undefined ? value : "—"}
+      </p>
+      <p className="text-sm opacity-80 mt-1">{label}</p>
+    </div>
+  );
+}
+
+function Shortcut({
+  href,
+  title,
+  description,
+  bg,
+}: {
+  href: string;
+  title: string;
+  description: string;
+  bg: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`rounded-xl border p-5 flex flex-col gap-2 transition cursor-pointer ${bg}`}
+    >
+      <p className="font-semibold text-gray-800">{title}</p>
+      <p className="text-sm text-gray-500">{description}</p>
+    </Link>
   );
 }
