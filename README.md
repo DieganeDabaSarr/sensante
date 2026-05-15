@@ -56,5 +56,15 @@ openssl rand -base64 32
 
 Colle le résultat dans `NEXTAUTH_SECRET`.
 
+## Version finale v1.0
+
+### Prérequis
+- Docker Desktop installé
+
+### Lancer l'application
+```bash
+docker compose up --build
+docker compose exec app npx prisma db push
+
 ## Équipe
 Licence 3 GLSI - ESP/UCAD - 2025-2026
